@@ -25,6 +25,7 @@ public class Database
     public class WeatherData
     {
         public readonly int nID;
+        public readonly string date;
         public readonly string time;
         public readonly WeatherConditions currentState;      //날씨상태
         public readonly float temperatures;                 //기온
@@ -32,13 +33,10 @@ public class Database
 
         public WeatherData()
         {
-            time = string.Empty;
-            currentState = WeatherConditions.Cloudy;
-            temperatures = 27.4f;
-            humidity = 50;
         }
-        public WeatherData(string _time, WeatherConditions _currentState, float _temperatures, int _humi)
+        public WeatherData(string _date,string _time, WeatherConditions _currentState, float _temperatures, int _humi)
         {
+            date = _date;
             time = _time;
             currentState = _currentState;
             temperatures = _temperatures;
@@ -48,6 +46,7 @@ public class Database
         {
             int count = 0;
             this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0 ;
+            this.date = inputData[count++];
             this.time = inputData[count++];
             this.currentState = (Database.WeatherConditions)Enum.Parse(typeof(Database.WeatherConditions), inputData[count++]);
             this.temperatures = Convert.ToSingle(inputData[count++]);
@@ -58,17 +57,17 @@ public class Database
     public class WindData
     {
         public readonly int nID;
-        public string time;
-        public Vector3 windDirection;           //풍향
-        public float windSpeed;                //풍속
+        public readonly string date;
+        public readonly string time;
+        public readonly Vector3 windDirection;           //풍향
+        public readonly float windSpeed;                //풍속
+
         public WindData()
         {
-            time = string.Empty;
-            windDirection = Vector3.zero;
-            windSpeed = 0.0f;
         }
-        public WindData(string _time, Vector3 _windDirection, float _windSpeed)
+        public WindData(string _date, string _time, Vector3 _windDirection, float _windSpeed)
         {
+            date = _date;
             time = _time;
             windDirection = _windDirection;
             windSpeed = _windSpeed;
@@ -77,6 +76,7 @@ public class Database
         {
             int count = 0;
             this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0;
+            this.date = inputData[count++];
             this.time = inputData[count++];
             this.windDirection = Database.StringToVector3(inputData[count++]);
             this.windSpeed = Convert.ToSingle(inputData[count++]);
@@ -89,19 +89,17 @@ public class Database
     public class WaveData
     {
         public readonly int nID;
-        public string time;
-        public float waveHeight;                  //파고
-        public float waveSpeed;                  //파속
+        public readonly string date;
+        public readonly string time;
+        public readonly float waveHeight;                  //파고
+        public readonly float waveSpeed;                  //파속
+
         public WaveData()
         {
-            time = string.Empty;
-            waveHeight = 1.0f;
-            waveSpeed = 1.0f;
-
-
         }
-        public WaveData(string _time, float _waveHeight, float _waveSpeed)
+        public WaveData(string _date, string _time, float _waveHeight, float _waveSpeed)
         {
+            date = _date;
             time = _time;
             waveHeight = _waveHeight;
             waveSpeed = _waveSpeed;
@@ -110,6 +108,7 @@ public class Database
         {
             int count = 0;
             this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0;
+            this.date = inputData[count++];
             this.time = inputData[count++];
             this.waveHeight = Convert.ToSingle(inputData[count++]);
             this.waveSpeed = Convert.ToSingle(inputData[count++]);
@@ -123,15 +122,16 @@ public class Database
             public Vector3 currentSet;             //유향
             public float currentRate;              //유속
         }
-        public string time;
+        public readonly string date;
+        public readonly string time;
         public List<Pipe> pipes;
 
         public PipeSensorData()
         {
-            time = string.Empty;
         }
-        public PipeSensorData(string _time, List<Pipe> _pipes)
+        public PipeSensorData(string _date, string _time, List<Pipe> _pipes)
         {
+            date = _date;
             time = _time;
             pipes = _pipes;
 
@@ -143,19 +143,18 @@ public class Database
     public class RobotData
     {
         public readonly int nID;
-        public string time;
-        public Vector3 position;
-        public Vector3 forwardVector;
+        public readonly string date;
+        public readonly string time;
+        public readonly Vector3 position;
+        public readonly Vector3 forwardVector;
 
 
         public RobotData()
         {
-            time = string.Empty;
-            position = Vector3.zero;
-            forwardVector = Vector3.zero;
         }
-        public RobotData(string _time, Vector3 _Pos, Vector3 _forwardVector)
+        public RobotData(string _date, string _time, Vector3 _Pos, Vector3 _forwardVector)
         {
+            date = _date;
             time = _time;
             position = _Pos;
             forwardVector = _forwardVector;
@@ -164,6 +163,7 @@ public class Database
         {
             int count = 0;
             this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0;
+            this.date = inputData[count++];
             this.time = inputData[count++];
             this.position = Database.StringToVector3(inputData[count++]);
             this.forwardVector = Database.StringToVector3(inputData[count++]);
@@ -174,20 +174,18 @@ public class Database
     public class SonarData
     {
         public readonly int nID;
-        public string time;
-        public float distance;
-        public float depth;
-        public Vector3 direction;
+        public readonly string date;
+        public readonly string time;
+        public readonly float distance;
+        public readonly float depth;
+        public readonly Vector3 direction;
 
         public SonarData()
         {
-            time = string.Empty;
-            distance = 0.0f;
-            depth = 0.0f;
-            direction = Vector3.zero;
         }
-        public SonarData(string _time, float _distance, float _depth, Vector3 _direction)
+        public SonarData(string _date, string _time, float _distance, float _depth, Vector3 _direction)
         {
+            date = _date;
             time = _time;
             distance = _distance;
             depth = _depth;
@@ -197,6 +195,7 @@ public class Database
         {
             int count = 0;
             this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0;
+            this.date = inputData[count++];
             this.time = inputData[count++];
             this.distance = Convert.ToSingle(inputData[count++]);
             this.depth = Convert.ToSingle(inputData[count++]);
@@ -208,43 +207,84 @@ public class Database
     public class Simulation
     {
         public readonly int nID;
+        public readonly string date;
         public readonly string time;
 
-        //WeatherData
-        public readonly WeatherConditions currentState;      //날씨상태
-        public readonly float temperatures;                 //기온
-        public readonly int humidity;                        //습도
-        //WindData
-        public Vector3 windDirection;           //풍향
-        public float windSpeed;                //풍속
-        //WaveData
-        public float waveHeight;                  //파고
-        public float waveSpeed;                  //파속
-        //robotData
-        public Vector3 position;
-        public Vector3 forwardVector;
-        //SonarData
-        public float distance;
-        public float depth;
-        public Vector3 direction;
+        public readonly WeatherData weather;
+        public readonly WindData wind;
+        public readonly WaveData wave;
+        public readonly RobotData robot;
+        public readonly SonarData sonar;
+
+        ////WeatherData
+        //public readonly WeatherConditions currentState;      //날씨상태
+        //public readonly float temperatures;                 //기온
+        //public readonly int humidity;                        //습도
+        ////WindData
+        //public Vector3 windDirection;           //풍향
+        //public float windSpeed;                //풍속
+        ////WaveData
+        //public float waveHeight;                  //파고
+        //public float waveSpeed;                  //파속
+        ////robotData
+        //public Vector3 position;
+        //public Vector3 forwardVector;
+        ////SonarData
+        //public float distance;
+        //public float depth;
+        //public Vector3 direction;
+
+        public Simulation()
+        {
+
+        }
 
         public Simulation(string[] inputData)
         {
+
             int count = 0;
             this.nID = Convert.ToInt32(inputData[count++]);
+            this.date = inputData[count++];
             this.time = inputData[count++];
-            this.currentState = (Database.WeatherConditions)Enum.Parse(typeof(Database.WeatherConditions), inputData[count++]);
-            this.temperatures = Convert.ToSingle(inputData[count++]);
-            this.humidity = Convert.ToInt32(inputData[count++]);
-            this.windDirection = Database.StringToVector3(inputData[count++]);
-            this.windSpeed = Convert.ToSingle(inputData[count++]);
-            this.waveHeight = Convert.ToSingle(inputData[count++]);
-            this.waveSpeed = Convert.ToSingle(inputData[count++]);
-            this.position = Database.StringToVector3(inputData[count++]);
-            this.forwardVector = Database.StringToVector3(inputData[count++]);
-            this.distance = Convert.ToSingle(inputData[count++]);
-            this.depth = Convert.ToSingle(inputData[count++]);
-            this.direction = Database.StringToVector3(inputData[count++]);
+
+            weather = new WeatherData("","",
+                 (Database.WeatherConditions)Enum.Parse(typeof(Database.WeatherConditions), inputData[count++]),
+                 Convert.ToSingle(inputData[count++]),
+                 Convert.ToInt32(inputData[count++])
+                 );
+            
+            wind = new WindData("", "",
+                Database.StringToVector3(inputData[count++]),
+                Convert.ToSingle(inputData[count++])
+                );
+
+            wave = new WaveData("", "",
+                Convert.ToSingle(inputData[count++]),
+                Convert.ToSingle(inputData[count++])
+                );
+
+            robot = new RobotData("", "",
+                Database.StringToVector3(inputData[count++]), Database.StringToVector3(inputData[count++])
+                );
+
+            sonar = new SonarData("", "",
+                Convert.ToSingle(inputData[count++]),
+                Convert.ToSingle(inputData[count++]),
+                Database.StringToVector3(inputData[count++])
+                );
+
+            //this.currentState = (Database.WeatherConditions)Enum.Parse(typeof(Database.WeatherConditions), inputData[count++]);
+            //this.temperatures = Convert.ToSingle(inputData[count++]);
+            //this.humidity = Convert.ToInt32(inputData[count++]);
+            //this.windDirection = Database.StringToVector3(inputData[count++]);
+            //this.windSpeed = Convert.ToSingle(inputData[count++]);
+            //this.waveHeight = Convert.ToSingle(inputData[count++]);
+            //this.waveSpeed = Convert.ToSingle(inputData[count++]);
+            //this.position = Database.StringToVector3(inputData[count++]);
+            //this.forwardVector = Database.StringToVector3(inputData[count++]);
+            //this.distance = Convert.ToSingle(inputData[count++]);
+            //this.depth = Convert.ToSingle(inputData[count++]);
+            //this.direction = Database.StringToVector3(inputData[count++]);
         }
     }
 }

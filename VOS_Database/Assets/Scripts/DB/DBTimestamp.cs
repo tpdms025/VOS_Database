@@ -12,6 +12,7 @@ public class DBTimestamp : DBBasic
             string.Format(
                      "CREATE TABLE IF NOT EXISTS Timestamp(" +
                      "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                      "Time  TEXT," +
                      "CurrentState  TEXT," +
                      "Temperatures  REAL," +
@@ -37,17 +38,17 @@ public class DBTimestamp : DBBasic
         Database.SonarData sonarData = DBManager.Inst.getSonarData();
 
         string sqlQuery = string.Format("INSERT INTO Timestamp (" +
-            "Time,CurrentState,Temperatures,Humidity," +
+            "Date,Time,CurrentState,Temperatures,Humidity," +
             "WindDirection,WindSpeed," +
             "WaveHeight,WaveSpeed," +
             "Position,ForwardVector," +
             "Distance,Depth,Direction) " +
-            "VALUES('{0}','{1}',{2},{3}," +
-            "'{4}',{5}," +
-            "{6},{7}," +
-            "'{8}','{9}'," +
-            "{10},{11},'{12}')",
-             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"), weatherData.currentState, weatherData.temperatures, weatherData.humidity,
+            "VALUES('{0}','{1}','{2}',{3},{4}," +
+            "'{5}',{6}," +
+            "{7},{8}," +
+            "'{9}','{10}'," +
+            "{11},{12},'{13}')",
+             DateTime.Now.ToString("yyyy-MM-dd"),DateTime.Now.ToString("HH:mm:ss tt"), weatherData.currentState, weatherData.temperatures, weatherData.humidity,
              windData.windDirection, windData.windSpeed,
              waveData.waveHeight, waveData.waveSpeed,
              robotData.position, robotData.forwardVector,

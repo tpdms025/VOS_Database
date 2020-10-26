@@ -33,6 +33,7 @@ public class DBOrigin : DBBasic
             string.Format(
                      "CREATE TABLE IF NOT EXISTS WeatherData(" +
                      "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                      "Time  TEXT," +
                      "CurrentState  TEXT," +
                      "Temperatures  REAL," +
@@ -41,6 +42,7 @@ public class DBOrigin : DBBasic
             string.Format(
                     "CREATE TABLE IF NOT EXISTS WindData(" +
                      "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                      "Time  TEXT," +
                      "WindDirection TEXT," +
                      "WindSpeed REAL);"),
@@ -48,6 +50,7 @@ public class DBOrigin : DBBasic
             string.Format(
                     "CREATE TABLE IF NOT EXISTS WaveData(" +
                     "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                     "Time  TEXT," +
                     "WaveHeight    REAL," +
                     "WaveSpeed REAL);"),
@@ -55,6 +58,7 @@ public class DBOrigin : DBBasic
             string.Format(
                     "CREATE TABLE IF NOT EXISTS RobotData(" +
                     "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                     "TIme  TEXT," +
                     "Position  TEXT," +
                     "ForwardVector TEXT);"),
@@ -62,6 +66,7 @@ public class DBOrigin : DBBasic
             string.Format(
                     "CREATE TABLE IF NOT EXISTS SonarData(" +
                     "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                     "Date  TEXT," +
                     "Time  TEXT," +
                     "Distance  REAL," +
                     "Depth REAL," +
@@ -77,23 +82,23 @@ public class DBOrigin : DBBasic
         switch (dataType)
         {
             case 0:
-                sqlQuery = string.Format("INSERT INTO WeatherData (Time,CurrentState,Temperatures,Humidity) VALUES('{0}','{1}',{2},{3})", weatherData.time, weatherData.currentState, weatherData.temperatures, weatherData.humidity);
+                sqlQuery = string.Format("INSERT INTO WeatherData (Date,Time,CurrentState,Temperatures,Humidity) VALUES('{0}','{1}','{2}',{3},{4})", weatherData.date,weatherData.time, weatherData.currentState, weatherData.temperatures, weatherData.humidity);
                 break;
             case 1:
-                sqlQuery = string.Format("INSERT INTO WindData (Time,WindDirection,WindSpeed) VALUES('{0}','{1}',{2})", windData.time, windData.windDirection, windData.windSpeed);
+                sqlQuery = string.Format("INSERT INTO WindData (Date,Time,WindDirection,WindSpeed) VALUES('{0}','{1}','{2}',{3})", windData.date, windData.time, windData.windDirection, windData.windSpeed);
                 break;
             case 2:
-                sqlQuery = string.Format("INSERT INTO WaveData (Time,WaveHeight,WaveSpeed) VALUES('{0}',{1},{2})", waveData.time, waveData.waveHeight, waveData.waveSpeed);
+                sqlQuery = string.Format("INSERT INTO WaveData (Date,Time,WaveHeight,WaveSpeed) VALUES('{0}','{1}',{2},{3})", waveData.date, waveData.time, waveData.waveHeight, waveData.waveSpeed);
                 break;
             case 3:
                 //배열을 데이터로 어떤식으로 넣을지 생각해봐야함
-                //sqlQuery = "INSERT INTO PipeSensorData (Time,CurrentSet,CurrentRate) VALUES('" + pipeSensorData.time + "'," + pipeSensorData.pipes +")";
+                //sqlQuery = "INSERT INTO PipeSensorData (Date,Time,CurrentSet,CurrentRate) VALUES('" + pipeSensorData.time + "'," + pipeSensorData.pipes +")";
                 break;
             case 4:
-                sqlQuery = string.Format("INSERT INTO RobotData (Time,Position,ForwardVector) VALUES('{0}','{1}','{2}')", robotData.time, robotData.position, robotData.forwardVector);
+                sqlQuery = string.Format("INSERT INTO RobotData (Date,Time,Position,ForwardVector) VALUES('{0}','{1}','{2}','{3}')", robotData.date, robotData.time, robotData.position, robotData.forwardVector);
                 break;
             case 5:
-                sqlQuery = string.Format("INSERT INTO SonarData (Time,Distance,Depth,Direction) VALUES('{0}',{1},{2},'{3}')", sonarData.time, sonarData.distance, sonarData.depth, sonarData.direction);
+                sqlQuery = string.Format("INSERT INTO SonarData (Date,Time,Distance,Depth,Direction) VALUES('{0}',{1}, {2},'{3}')", sonarData.date, sonarData.time, sonarData.distance, sonarData.depth, sonarData.direction);
                 break;
             default:
                 break;

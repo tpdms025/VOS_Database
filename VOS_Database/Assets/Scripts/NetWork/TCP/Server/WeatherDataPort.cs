@@ -30,13 +30,14 @@ public class WeatherDataPort : TCP_ListenPort
         time += Time.deltaTime;
         if ((time >= sendIntervalTime) && clients.Count != 0)
         {
-            string _time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
+            string _time = DateTime.Now.ToString("HH:mm:ss tt");
             int enumCount = Enum.GetValues(typeof(Database.WeatherConditions)).Length;
             Database.WeatherConditions state = (Database.WeatherConditions)UnityEngine.Random.Range(0, enumCount - 1);
             float temperature = UnityEngine.Random.Range(-20.0f, 45.0f);
             int humidity = UnityEngine.Random.Range(0, 100);
 
-            string data = string.Format("{0}^{1}^{2}^{3}", _time, state,temperature ,humidity);
+            string data = string.Format("{0}^{1}^{2}^{3}^{4}", date,_time, state,temperature ,humidity);
             stringData.Enqueue(data);
 
             time = 0.0f;

@@ -12,12 +12,14 @@ public class SonarDataPort : SerialCOM_Server
         if ((time >= sendIntervalTime))
         {
             //TODO:
-            string _time = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
+            string date = System.DateTime.Now.ToString("yyyy-MM-dd");
+            string _time = System.DateTime.Now.ToString("HH:mm:ss tt");
+
             float distance = UnityEngine.Random.Range(0.0f, 5.4f);
             float depth = UnityEngine.Random.Range(0.0f, 5.4f);
             Vector3 direction = UnityEngine.Random.insideUnitCircle;
 
-            string data = string.Format("{0}^{1}^{2}^{3}", _time, distance, depth, direction);
+            string data = string.Format("{0}^{1}^{2}^{3}^{4}", date, _time, distance, depth, direction);
             sendData.Enqueue(data);
             time = 0.0f;
         }

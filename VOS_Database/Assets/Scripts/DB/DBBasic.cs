@@ -35,11 +35,20 @@ public class DBBasic
     /// <summary>
     /// 데이터베이스 생성
     /// </summary>
-    /// <param name="path">생성할 파일경로</param>
+    /// <param name="path">생성할 파일경로 (로컬) </param>
     /// <returns></returns>
     public void DBCreate(string path)
     {
         filepath = DBManager.Inst.actualPath + path;
+        string targetPath = filepath.Substring(0, filepath.Length - new FileInfo(filepath).Name.Length);
+
+        //디렉토리가 없다면 생성
+        if (!File.Exists(targetPath))
+        {
+            System.IO.Directory.CreateDirectory(targetPath);
+        }
+
+        //파일이 없다면 생성
         if (!System.IO.File.Exists(filepath))
         {
             SQLiteConnection.CreateFile(filepath);

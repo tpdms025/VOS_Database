@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 64106333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0018518518, y: 0.0018518518, z: 0.0018518518}
+  m_LocalScale: {x: 0.0027777778, y: 0.0027777778, z: 0.0027777778}
   m_Children:
   - {fileID: 923500529}
   - {fileID: 1430763274}
@@ -352,29 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a5572b69f759942a07f762c174efbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherData:
-    time: 
-    currentState: 0
-    temperatures: 27.4
-  windData:
-    time: 
-    windDirection: {x: 0, y: 0, z: 0}
-    windSpeed: 0
-  waveData:
-    time: 
-    waveHeight: 0
-    waveSpeed: 0
-  pipeSensorData:
-    time: 
-  robotData:
-    time: 
-    position: {x: 0, y: 0, z: 0}
-    forwardVector: {x: 0, y: 0, z: 0}
-  sonarData:
-    time: 
-    distance: 0
-    depth: 0
-    direction: {x: 0, y: 0, z: 0}
 --- !u!4 &166734121
 Transform:
   m_ObjectHideFlags: 0
@@ -591,12 +568,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad132b8d8ae3b94ab18e3c984dd303e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
   state: 0
+  ip: 
+  port: 0
   m_runThread: 1
   portReady: 0
   sendIntervalTime: 1
   isSend: 0
-  port: COM4
+  portString: 
   baudrate: 9600
 --- !u!114 &260731167
 MonoBehaviour:
@@ -1215,12 +1195,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad132b8d8ae3b94ab18e3c984dd303e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
   state: 0
+  ip: 
+  port: 0
   m_runThread: 1
   portReady: 0
   sendIntervalTime: 1
   isSend: 0
-  port: COM4
+  portString: 
   baudrate: 9600
 --- !u!1001 &1412739816
 PrefabInstance:
@@ -1242,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 6397721325319183354, guid: 323b6652bf4a2054c8362311c31e71c0,
         type: 3}
       propertyPath: mValue
-      value: 0.3055559
+      value: 0.30555555
       objectReference: {fileID: 0}
     - target: {fileID: 6397721325319183354, guid: 323b6652bf4a2054c8362311c31e71c0,
         type: 3}

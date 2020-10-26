@@ -6,19 +6,15 @@ using UnityEngine;
 
 public class DBSimulation 
 {
-    /// <summary>
-    /// key : 날짜
-    /// value : 테이블
-    /// </summary>
-    public Dictionary<string, TableTemplate<Database.Simulation>> simulList = new Dictionary<string, TableTemplate<Database.Simulation>>();
+    //public List<string> tableNameList = new List<string>();
    
-    public void LoadTable(string fileName, string targetPath)
+    public TableTemplate<Database.Simulation> LoadTable(string fileName, string targetPath)
     {
         string fullpath = System.IO.Path.Combine(targetPath, fileName);
         TableTemplate<Database.Simulation> m_simulationTable = new TableTemplate<Database.Simulation>(fullpath);
         m_simulationTable.Load();
 
-        simulList.Add(fileName, m_simulationTable);
+        return m_simulationTable;
     }
 
     /*

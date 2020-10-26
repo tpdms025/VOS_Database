@@ -105,20 +105,21 @@ public class DBManager : MonoBehaviour
         timestampData.InsertDB();
     }
 
-
     /// <summary>
-    /// 시뮬레이션 테이블 정보들
+    /// 시뮬레이션 파일의 테이블을 가져온다.
     /// </summary>
+    /// <param name="_fileName"></param>
     /// <returns></returns>
-    public Dictionary<string, TableTemplate<Database.Simulation>> SetSimulationList()
+    public TableTemplate<Database.Simulation> get_SimulationTable(string _fileName)
     {
-        return simulationData.simulList;
+        return simulationData.LoadTable(_fileName, actualPath + "SimulationData");
     }
 
     #region FileName List
 
     /// <summary>
-    /// timestamp 폴더내 파일이름들을 가져온다. (파일 확장자명도 포함)
+    /// timestamp 폴더내 파일이름들을 이름순으로 가져온다.
+    /// (파일 확장자명도 포함)
     /// </summary>
     /// <returns></returns>
     public List<string> Get_FileNameList_Timestamp()
@@ -135,7 +136,8 @@ public class DBManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 이름 순서으로 시뮬레이션 파일의 이름들을 가져온다.
+    /// 시뮬레이션 파일의 이름들을 이름순으로 가져온다.
+    /// (파일 확장자명도 포함)
     /// </summary>
     /// <returns></returns>
     public List<string> Get_FileNameList_Simulation_namesort()
@@ -150,7 +152,7 @@ public class DBManager : MonoBehaviour
 
         foreach(var v in fi)
         {
-            Debug.Log(v.Name);
+            fileNames.Add(v.Name);
         }
         #region 이전버전
         //foreach (var di in directory.GetFiles("*.txt",SearchOption.AllDirectories))
@@ -162,22 +164,6 @@ public class DBManager : MonoBehaviour
         return fileNames;
     }
 
-    /// <summary>
-    /// 추가한 순서로 시뮬레이션 파일의 이름들을 가져온다.
-    /// </summary>
-    /// <returns></returns>
-    public List<string> Get_FileNameList_Simulation()
-    {
-        List<string> fileNames = new List<string>();
-
-        foreach (KeyValuePair<string, TableTemplate<Database.Simulation>> item in SetSimulationList())
-        {
-            fileNames.Add(item.Key);
-        }
-
-        return fileNames;
-    }
-
     #endregion
 
 
@@ -185,7 +171,7 @@ public class DBManager : MonoBehaviour
     /// Timestamp.sqlite 파일을 csv파일로 변환한다.
     /// (Export 버튼 클릭시 사용될 함수)
     /// </summary>
-    /// <param name="_fileName">파일이름(확장자명도 포함)</param>
+    /// <param name="_fileName">Export할 파일이름(확장자명도 포함)</param>
     /// <returns></returns>
     public string Export_DBTimestamp(string _fileName)
     {
@@ -193,20 +179,16 @@ public class DBManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 시뮬레이션 파일을 복사하고 테이블을 로드한다.
+    /// 시뮬레이션 DB를 임포트한다.
     /// (Import 버튼 클릭시 사용될 함수)
     /// </summary>
-    /// <param name="sourcePath"></param>
-    public void LoadSimulationTable(string sourcePath)
+    /// <param name="sourcePath">로드할 파일의 경로 (확장자명까지) </param>
+    public void Import_DBSimulation(string sourcePath)
     {
         string _fileName = new FileInfo(sourcePath).Name;
         string targetPath = actualPath + "SimulationData";
 
-        //복사
         FileCopy(sourcePath, targetPath);
-
-        //테이블 로드
-        simulationData.LoadTable(_fileName, targetPath);
     }
 
 
@@ -219,6 +201,7 @@ public class DBManager : MonoBehaviour
         if(File.Exists(sourcePath))
         {
             string fileName = new FileInfo(sourcePath).Name;
+            string destFile = System.IO.Path.Combine(targetPath, fileName);
             
             //디렉토리가 없다면
             if (!File.Exists(targetPath))
@@ -226,7 +209,12 @@ public class DBManager : MonoBehaviour
                 System.IO.Directory.CreateDirectory(targetPath);
             }
 
-            string destFile = System.IO.Path.Combine(targetPath, fileName);
+            //파일이 있다면
+            if(File.Exists(destFile))
+            {
+                //TODO: 덮어쓰기 할건지에 대한 다이얼로그창 띄우기
+                ///////
+            }
 
             System.IO.File.Copy(sourcePath, destFile, true);
         }
@@ -390,25 +378,31 @@ public class DBManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Keypad1))
         {
-            Get_FileNameList_Simulation();
+            Get_FileNameList_Simulation_namesort();
         }
     }
 #endif
 
     private IEnumerator Main()
     {
+        preDate = System.DateTime.Now.ToString("yyyy-MM-dd");
+        string originFileName = "Origin_" + preDate + ".sqlite";
+        string timestampFileName = preDate + ".sqlite";
+
         //CreateFile
-        originData.DBCreate("VOS_Data.sqlite");
-        timestampData.DBCreate("InternalData/Timestamp/VOS_Timestamp2-1.sqlite");
+        originData.DBCreate(Path.Combine("InternalData", "Origin", originFileName));
+        timestampData.DBCreate(Path.Combine("InternalData", "Timestamp", timestampFileName));
 
 
         //Connect
-        originData.DBConnect("VOS_Data.sqlite");
-        timestampData.DBConnect("InternalData/Timestamp/VOS_Timestamp2-1.sqlite");
+        originData.DBConnect(Path.Combine("InternalData", "Origin", originFileName));
+        timestampData.DBConnect(Path.Combine("InternalData", "Timestamp", timestampFileName));
 
 
         //CreateTable
+        originData.CreateAllTable();
         timestampData.CreateAllTable();
+        StartCoroutine(DateCheck());
 
         yield return null;
 
@@ -417,7 +411,41 @@ public class DBManager : MonoBehaviour
 
     }
 
-    
+    private string preDate = string.Empty;
+    private string curDate = string.Empty;
+
+    /// <summary>
+    /// 데이터 날짜에 맞게 파일이름 생성
+    /// </summary>
+    private IEnumerator DateCheck()
+    {
+        while (true)
+        {
+            curDate = System.DateTime.Now.ToString("yyyy-MM-dd");
+            if (preDate != curDate)
+            {
+                string originFileName = "Origin_" + curDate + ".sqlite";
+                string timestampFileName = curDate + ".sqlite";
+
+                //CreateFile
+                originData.DBCreate(Path.Combine("InternalData", "Origin", originFileName));
+                timestampData.DBCreate(Path.Combine("InternalData", "Timestamp", timestampFileName));
+
+
+                //Connect
+                originData.DBConnect(Path.Combine("InternalData", "Origin", originFileName));
+                timestampData.DBConnect(Path.Combine("InternalData", "Timestamp", timestampFileName));
+
+
+                //CreateTable
+                originData.CreateAllTable();
+                timestampData.CreateAllTable();
+
+            }
+            yield return null;
+        }
+    }
+
     private void OnApplicationQuit()
     {
         originData.DBDisconnect();

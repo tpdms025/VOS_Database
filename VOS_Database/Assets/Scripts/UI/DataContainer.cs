@@ -89,11 +89,8 @@ public class DataContainer : MonoBehaviour
 
     #region Toggle
     public void OnChangeToggle(UIToggle uIToggle)
-    {
-
-        
+    {    
         UIToggle cur = uIToggle;
-        Debug.Log(cur.name);
 
         //if (cur.value == false) return;
 
@@ -110,7 +107,6 @@ public class DataContainer : MonoBehaviour
                 serverWindow.SetActive(true);
                 break;
         }
-
     }
 #endregion
 

@@ -47,7 +47,7 @@ public class OpenFileText : MonoBehaviour, IPointerDownHandler
         var paths = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true);
         if (paths.Length > 0)
         {
-            DBManager.Inst.LoadSimulationTable(paths[0]);
+            DBManager.Inst.Import_DBSimulation(paths[0]);
             //StartCoroutine(OutputRoutine(new System.Uri(paths[0]).AbsoluteUri));
         }
     }
