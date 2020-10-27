@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-// Cracked 환경정보를 관리하는 포트
+// 환경정보를 관리하는 포트
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-04-27
@@ -10,11 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Net.Sockets;
 using System;
-using System.Net;
-using System.IO;
-using System.Threading;
 
 public class WeatherDataPort : TCP_ListenPort
 {

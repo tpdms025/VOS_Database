@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading;
 using System.Data;
 
-public enum DataType { WeatherData, WindData , WaveData , PipeSensorData, RobotData , SonarData, All =30 };
+public enum DataType { WeatherData, WindData, ShipData , WaveData , PipeSensorData, RobotData , SonarData, All =30 };
 
 public class DBManager : MonoBehaviour
 {
@@ -39,6 +39,10 @@ public class DBManager : MonoBehaviour
     {
         return originData.windData;
         //return windData;
+    }
+    public Database.ShipData getShipData()
+    {
+        return originData.shipData;
     }
     public Database.WaveData getwaveData()
     {
@@ -71,6 +75,11 @@ public class DBManager : MonoBehaviour
     public void DataEnqueue(Database.WindData data)
     {
         originData.windDataQueue.Enqueue(data);
+        //windDataQueue.Enqueue(data);
+    }
+    public void DataEnqueue(Database.ShipData data)
+    {
+        originData.shipDataQueue.Enqueue(data);
         //windDataQueue.Enqueue(data);
     }
     public void DataEnqueue(Database.WaveData data)
@@ -402,6 +411,8 @@ public class DBManager : MonoBehaviour
         //CreateTable
         originData.CreateAllTable();
         timestampData.CreateAllTable();
+
+
         StartCoroutine(DateCheck());
 
         yield return null;

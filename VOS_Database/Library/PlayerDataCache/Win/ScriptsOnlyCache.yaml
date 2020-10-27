@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - RobotDataPort
+    - ShipDataPort
     - SonarDataPort
     - WaveDataPort
     - WeatherDataPort
@@ -45,21 +46,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11240}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 11514}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 12008}
+      Script: {instanceID: 12010}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12754}
+      Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13122}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13568}
+      Script: {instanceID: 13572}
     - Class: 114
-      Script: {instanceID: 13604}
+      Script: {instanceID: 13608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -89,6 +90,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
@@ -96,17 +99,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11240}
     - Class: 114
-      Script: {instanceID: 11410}
+      Script: {instanceID: 11364}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11412}
     - Class: 114
-      Script: {instanceID: 11910}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 12008}
+      Script: {instanceID: 11912}
     - Class: 114
-      Script: {instanceID: 13122}
+      Script: {instanceID: 12010}
     - Class: 114
-      Script: {instanceID: 13604}
+      Script: {instanceID: 13126}
+    - Class: 114
+      Script: {instanceID: 13608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -134,8 +139,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 49
-      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
@@ -143,25 +146,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11240}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 11514}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11740}
+      Script: {instanceID: 11742}
     - Class: 114
-      Script: {instanceID: 12008}
+      Script: {instanceID: 12010}
     - Class: 114
-      Script: {instanceID: 12514}
+      Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12754}
+      Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 12794}
+      Script: {instanceID: 12796}
     - Class: 114
-      Script: {instanceID: 13122}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13228}
     - Class: 114
-      Script: {instanceID: 13604}
+      Script: {instanceID: 13608}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -239,6 +242,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UISpriteCollection
+  - hash:
+      serializedVersion: 2
+      Hash: 2b688e7e827a452b9c7ae5af3aa57df1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShipDataPort
   - hash:
       serializedVersion: 2
       Hash: 931bd78eac7835aef7cd19cbe66f75f8
@@ -1141,6 +1150,12 @@ ScriptsOnlyBuild:
     className: UIAtlas
   - hash:
       serializedVersion: 2
+      Hash: 4ce53c49ff3f052ee70084826e49ce3d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ShipDataClient
+  - hash:
+      serializedVersion: 2
       Hash: a99b59d27d911423ed976291aea0f77f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1543,7 +1558,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 5
   scenePathNames:
-  - Assets/Scenes/UdpDemoServerScene.unity
   - Assets/Scenes/TcpDemoServerScene.unity
+  - Assets/Scenes/UdpDemoServerScene.unity
   - Assets/Scenes/RS232ServerScene.unity
-  playerPath: C:/Users/admin/Desktop/VOS_1026_DemoServer/Udp/VOS_Database.exe
+  playerPath: C:/Users/admin/Desktop/VOS_Project/VOS_1026_DemoServer/Tcp/VOS_Database.exe

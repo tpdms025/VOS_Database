@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/UdpDemoServerScene.unity
-    guid: 2a1318a6ee5ab5f4c9258066a1cd633e
-  - enabled: 1
     path: Assets/Scenes/TcpDemoServerScene.unity
     guid: d1ea40752144e814e9056bb817f461db
+  - enabled: 1
+    path: Assets/Scenes/UdpDemoServerScene.unity
+    guid: 2a1318a6ee5ab5f4c9258066a1cd633e
   - enabled: 1
     path: Assets/Scenes/RS232ServerScene.unity
     guid: c5bc6fce2e04014409082bda6b6e637a

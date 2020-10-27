@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-//  
+//  바람정보를 관리하는 포트
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-04-27
@@ -11,7 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sh : TCP_ListenPort
+public class WindDataPort : TCP_ListenPort
 {
     private void Awake()
     {

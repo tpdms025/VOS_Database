@@ -681,7 +681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -376, y: 285}
+  m_AnchoredPosition: {x: -376, y: 15}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1002734144
@@ -1164,6 +1164,8 @@ GameObject:
   - component: {fileID: 1367186621}
   - component: {fileID: 1367186619}
   - component: {fileID: 1367186618}
+  - component: {fileID: 1367186623}
+  - component: {fileID: 1367186624}
   m_Layer: 0
   m_Name: Clients
   m_TagString: Untagged
@@ -1183,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955e178d2e3232a4796576d89bbbc7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 4
+  _type: 5
   state: 0
   ip: 192.168.0.3
   port: 8002
@@ -1219,7 +1221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   state: 0
-  ip: 192.168.0.3
+  ip: 172.31.7.119
   port: 7001
   socketReady: 0
 --- !u!114 &1367186621
@@ -1236,7 +1238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   state: 0
-  ip: 192.168.0.3
+  ip: 172.31.7.119
   port: 7002
   socketReady: 0
 --- !u!4 &1367186622
@@ -1253,6 +1255,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1367186623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367186617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f855f43ef571449c43abe696229d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 6
+  state: 0
+  ip: 
+  port: 0
+  m_runThread: 1
+  portReady: 0
+  sendIntervalTime: 1
+  isSend: 0
+  portString: 
+  baudrate: 9600
+--- !u!114 &1367186624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367186617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351c4ebbeabfc534bafe62e73d1924fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
+  state: 0
+  ip: 172.31.7.119
+  port: 7003
+  socketReady: 0
 --- !u!1 &1376904160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27, y: 402}
+  m_AnchoredPosition: {x: -27, y: 132}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376904162
@@ -1369,6 +1410,28 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1367186618}
+        m_MethodName: ConnectedToServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1367186623}
+        m_MethodName: Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1367186624}
         m_MethodName: ConnectedToServer
         m_Mode: 1
         m_Arguments:
@@ -1725,7 +1788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -376, y: 402}
+  m_AnchoredPosition: {x: -376, y: 132}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610847821

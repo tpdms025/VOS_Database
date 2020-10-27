@@ -53,6 +53,7 @@ public class Database
             this.humidity = Convert.ToInt32(inputData[count++]);
         }
     }
+
     [Serializable]
     public class WindData
     {
@@ -83,8 +84,74 @@ public class Database
         }
     }
 
+    [Serializable]
+    public class ShipData
+    {
+        public readonly int nID;
+        public readonly string date;
+        public readonly string time;
+        public readonly int latitude;      //위도
+        public readonly int longitude;     //경도
+        public readonly int altitude;     //고도
+        public readonly short heave;
+        public readonly short northVelocity;
+        public readonly short eastVelocity;
+        public readonly short downvelocity;
+        public readonly short roll;
+        public readonly short pitch;
+        public readonly ushort heading;
+        public readonly short rollRate;
+        public readonly short pitchRate;
+        public readonly short headingRate;
 
-    //중요한 데이터들
+
+        public ShipData()
+        {
+        }
+        public ShipData(string _date, string _time, int _latitude, int _longitude, int _altitude, short _heave,
+            short _northVelocity, short _eastVelocity, short _downvelocity, short _roll, short _pitch, ushort _heading,
+            short _roll_rate, short _pitch_rate, short _heading_rate)
+        {
+            date = _date;
+            time = _time;
+            latitude = _latitude;
+            longitude = _longitude;
+            altitude = _altitude;
+            heave = _heave;
+            northVelocity = _northVelocity;
+            eastVelocity = _eastVelocity;
+            downvelocity = _downvelocity;
+            roll = _roll;
+            pitch = _pitch;
+            heading = _heading;
+            rollRate = _roll_rate;
+            pitchRate = _pitch_rate;
+            headingRate = _heading_rate;
+        }
+
+        public ShipData(string[] inputData, bool includeID = false)
+        {
+            int count = 0;
+            this.nID = (includeID == true) ? Convert.ToInt32(inputData[count++]) : 0;
+
+            this.date = inputData[count++];
+            this.time = inputData[count++];
+            this.latitude = Convert.ToInt32(inputData[count++]);
+            this.longitude =Convert.ToInt32(inputData[count++]);
+            this.altitude = Convert.ToInt32(inputData[count++]);
+            this.heave = Convert.ToInt16(inputData[count++]); 
+            this.northVelocity =Convert.ToInt16(inputData[count++]); 
+            this.eastVelocity = Convert.ToInt16(inputData[count++]); 
+            this.downvelocity = Convert.ToInt16(inputData[count++]);
+            this.roll = Convert.ToInt16(inputData[count++]); 
+            this.pitch = Convert.ToInt16(inputData[count++]); 
+            this.heading = Convert.ToUInt16(inputData[count++]); 
+            this.rollRate = Convert.ToInt16(inputData[count++]); 
+            this.pitchRate = Convert.ToInt16(inputData[count++]); 
+            this.headingRate = Convert.ToInt16(inputData[count++]); 
+        }
+    }
+
     [Serializable]
     public class WaveData
     {
@@ -212,28 +279,12 @@ public class Database
 
         public readonly WeatherData weather;
         public readonly WindData wind;
+        public readonly ShipData ship;
         public readonly WaveData wave;
         public readonly RobotData robot;
         public readonly SonarData sonar;
 
-        ////WeatherData
-        //public readonly WeatherConditions currentState;      //날씨상태
-        //public readonly float temperatures;                 //기온
-        //public readonly int humidity;                        //습도
-        ////WindData
-        //public Vector3 windDirection;           //풍향
-        //public float windSpeed;                //풍속
-        ////WaveData
-        //public float waveHeight;                  //파고
-        //public float waveSpeed;                  //파속
-        ////robotData
-        //public Vector3 position;
-        //public Vector3 forwardVector;
-        ////SonarData
-        //public float distance;
-        //public float depth;
-        //public Vector3 direction;
-
+        
         public Simulation()
         {
 
@@ -258,6 +309,12 @@ public class Database
                 Convert.ToSingle(inputData[count++])
                 );
 
+            ship = new ShipData("", "", 
+                Convert.ToInt32(inputData[count++]), Convert.ToInt32(inputData[count++]), Convert.ToInt32(inputData[count++]),
+                Convert.ToInt16(inputData[count++]), Convert.ToInt16(inputData[count++]), Convert.ToInt16(inputData[count++]), Convert.ToInt16(inputData[count++]),
+                Convert.ToInt16(inputData[count++]), Convert.ToInt16(inputData[count++]), Convert.ToUInt16(inputData[count++]), Convert.ToInt16(inputData[count++]),
+                Convert.ToInt16(inputData[count++]), Convert.ToInt16(inputData[count++])); 
+
             wave = new WaveData("", "",
                 Convert.ToSingle(inputData[count++]),
                 Convert.ToSingle(inputData[count++])
@@ -273,18 +330,6 @@ public class Database
                 Database.StringToVector3(inputData[count++])
                 );
 
-            //this.currentState = (Database.WeatherConditions)Enum.Parse(typeof(Database.WeatherConditions), inputData[count++]);
-            //this.temperatures = Convert.ToSingle(inputData[count++]);
-            //this.humidity = Convert.ToInt32(inputData[count++]);
-            //this.windDirection = Database.StringToVector3(inputData[count++]);
-            //this.windSpeed = Convert.ToSingle(inputData[count++]);
-            //this.waveHeight = Convert.ToSingle(inputData[count++]);
-            //this.waveSpeed = Convert.ToSingle(inputData[count++]);
-            //this.position = Database.StringToVector3(inputData[count++]);
-            //this.forwardVector = Database.StringToVector3(inputData[count++]);
-            //this.distance = Convert.ToSingle(inputData[count++]);
-            //this.depth = Convert.ToSingle(inputData[count++]);
-            //this.direction = Database.StringToVector3(inputData[count++]);
         }
     }
 }

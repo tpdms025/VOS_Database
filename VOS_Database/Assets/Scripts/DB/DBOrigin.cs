@@ -6,12 +6,12 @@ using System.Data;
 using System.Threading;
 using UnityEngine;
 
-public enum OriginData { WeatherData, WindData, WaveData, PipeSensorData, RobotData, SonarData };
 
 public class DBOrigin : DBBasic
 {
     public Database.WeatherData weatherData = new Database.WeatherData();
     public Database.WindData windData = new Database.WindData();
+    public Database.ShipData shipData = new Database.ShipData();
     public Database.WaveData waveData = new Database.WaveData();
     public Database.PipeSensorData pipeSensorData = new Database.PipeSensorData();
     public Database.RobotData robotData = new Database.RobotData();
@@ -19,6 +19,7 @@ public class DBOrigin : DBBasic
 
     public Queue<Database.WeatherData> weatherDataQueue = new Queue<Database.WeatherData>();
     public Queue<Database.WindData> windDataQueue = new Queue<Database.WindData>();
+    public Queue<Database.ShipData> shipDataQueue = new Queue<Database.ShipData>();
     public Queue<Database.WaveData> waveDataQueue = new Queue<Database.WaveData>();
     public Queue<Database.PipeSensorData> pipeSensorDataQueue = new Queue<Database.PipeSensorData>();
     public Queue<Database.RobotData> robotDataQueue = new Queue<Database.RobotData>();
@@ -46,6 +47,25 @@ public class DBOrigin : DBBasic
                      "Time  TEXT," +
                      "WindDirection TEXT," +
                      "WindSpeed REAL);"),
+            //ShipData
+            string.Format(
+                    "CREATE TABLE IF NOT EXISTS ShipData(" +
+                    "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    "Date  TEXT," +
+                    "Time  TEXT," +
+                    "Latitude  INTEGER," +
+                    "Longitude INTEGER," +
+                    "Altitude  INTEGER," +
+                    "Heave INTEGER," +
+                    "NorthVelocity INTEGER," +
+                    "EastVelocity  INTEGER," +
+                    "Downvelocity  INTEGER," +
+                    "Roll  INTEGER," +
+                    "Pitch INTEGER," +
+                    "Heading   INTEGER," +
+                    "RollRate INTEGER," +
+                    "PitchRate    INTEGER," +
+                    "HeadingRate  INTEGER);"),
             //WaveData
             string.Format(
                     "CREATE TABLE IF NOT EXISTS WaveData(" +
@@ -58,7 +78,7 @@ public class DBOrigin : DBBasic
             string.Format(
                     "CREATE TABLE IF NOT EXISTS RobotData(" +
                     "ID    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                     "Date  TEXT," +
+                    "Date  TEXT," +
                     "TIme  TEXT," +
                     "Position  TEXT," +
                     "ForwardVector TEXT);"),
@@ -88,16 +108,21 @@ public class DBOrigin : DBBasic
                 sqlQuery = string.Format("INSERT INTO WindData (Date,Time,WindDirection,WindSpeed) VALUES('{0}','{1}','{2}',{3})", windData.date, windData.time, windData.windDirection, windData.windSpeed);
                 break;
             case 2:
-                sqlQuery = string.Format("INSERT INTO WaveData (Date,Time,WaveHeight,WaveSpeed) VALUES('{0}','{1}',{2},{3})", waveData.date, waveData.time, waveData.waveHeight, waveData.waveSpeed);
+                sqlQuery = string.Format("INSERT INTO ShipData (Date,Time,Latitude,Longitude,Altitude,Heave,NorthVelocity,EastVelocity,Downvelocity,Roll,Pitch,Heading,RollRate,PitchRate,HeadingRate)" +
+                    "VALUES('{0}','{1}',{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})", shipData.date, shipData.time, shipData.latitude, shipData.longitude, shipData.altitude, shipData.heave, shipData.northVelocity, shipData.eastVelocity, shipData.downvelocity,
+                    shipData.roll,shipData.pitch, shipData.heading, shipData.rollRate, shipData.pitchRate, shipData.headingRate);
                 break;
             case 3:
+                sqlQuery = string.Format("INSERT INTO WaveData (Date,Time,WaveHeight,WaveSpeed) VALUES('{0}','{1}',{2},{3})", waveData.date, waveData.time, waveData.waveHeight, waveData.waveSpeed);
+                break;
+            case 4:
                 //배열을 데이터로 어떤식으로 넣을지 생각해봐야함
                 //sqlQuery = "INSERT INTO PipeSensorData (Date,Time,CurrentSet,CurrentRate) VALUES('" + pipeSensorData.time + "'," + pipeSensorData.pipes +")";
                 break;
-            case 4:
+            case 5:
                 sqlQuery = string.Format("INSERT INTO RobotData (Date,Time,Position,ForwardVector) VALUES('{0}','{1}','{2}','{3}')", robotData.date, robotData.time, robotData.position, robotData.forwardVector);
                 break;
-            case 5:
+            case 6:
                 sqlQuery = string.Format("INSERT INTO SonarData (Date,Time,Distance,Depth,Direction) VALUES('{0}',{1}, {2},'{3}')", sonarData.date, sonarData.time, sonarData.distance, sonarData.depth, sonarData.direction);
                 break;
             default:
@@ -131,6 +156,14 @@ public class DBOrigin : DBBasic
                     {
                         windData = windDataQueue.Dequeue();
                         InsertDB(DataType.WindData.GetHashCode());
+                    }
+                }
+                if (shipDataQueue.Count > 0)
+                {
+                    for (int i = 0; i < shipDataQueue.Count; i++)
+                    {
+                        shipData = shipDataQueue.Dequeue();
+                        InsertDB(DataType.ShipData.GetHashCode());
                     }
                 }
                 if (waveDataQueue.Count > 0)

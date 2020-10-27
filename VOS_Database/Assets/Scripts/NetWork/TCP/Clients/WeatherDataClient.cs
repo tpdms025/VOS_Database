@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-// Cracked 환경정보를 담는 클라이언트
+// 환경정보를 담는 클라이언트
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-04-27
@@ -9,15 +9,7 @@
 
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using UnityEngine;
-using UnityEngine.UI;
+
 
 public class WeatherDataClient : TCP_LocalClient
 {

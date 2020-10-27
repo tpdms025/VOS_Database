@@ -220,10 +220,11 @@
     <Compile Include="Assets\Scripts\NetWork\Serial\SerialCOM_Server.cs" />
     <Compile Include="Assets\Scripts\NetWork\Serial\SonarDataClient.cs" />
     <Compile Include="Assets\Scripts\NetWork\Serial\SonarDataPort.cs" />
+    <Compile Include="Assets\Scripts\NetWork\TCP\Clients\ShipDataClient.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Clients\TCP_LocalClient.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Clients\WeatherDataClient.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Clients\WindDataClient.cs" />
-    <Compile Include="Assets\Scripts\NetWork\TCP\Server\Sh.cs" />
+    <Compile Include="Assets\Scripts\NetWork\TCP\Server\ShipDataPort.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Server\TCP_ListenPort.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Server\TCP_NetClient.cs" />
     <Compile Include="Assets\Scripts\NetWork\TCP\Server\WeatherDataPort.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Assets\Scripts\UI\ClientsValidation.cs" />
     <Compile Include="Assets\Scripts\UI\CurrentServerStatus.cs" />
     <Compile Include="Assets\Scripts\UI\DataContainer.cs" />
+    <Compile Include="Assets\Scripts\UI\GNSSWindow.cs" />
     <Compile Include="Assets\Scripts\UI\NGUI_ReuseGrid\IReuseCellData.cs" />
     <Compile Include="Assets\Scripts\UI\NGUI_ReuseGrid\UIReuseDragScrollView.cs" />
     <Compile Include="Assets\Scripts\UI\NGUI_ReuseGrid\UIReuseGrid.cs" />
