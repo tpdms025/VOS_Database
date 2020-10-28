@@ -27,8 +27,8 @@ public class ShipDataPort : TCP_ListenPort
             string date = System.DateTime.Now.ToString("yyyy-MM-dd");
             string _time = System.DateTime.Now.ToString("HH:mm:ss tt");
 
-            int latitude = UnityEngine.Random.Range(-180, 180);  
-            int longitude = UnityEngine.Random.Range(-180, 180);     
+            int latitude = UnityEngine.Random.Range(35, 40);  
+            int longitude = UnityEngine.Random.Range(124, 128);     
             int altitude = UnityEngine.Random.Range(-180, 180);    
             short heave = (short)UnityEngine.Random.Range(-200, 200);
             short northVelocity = (short)UnityEngine.Random.Range(-200,200);

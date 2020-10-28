@@ -150,6 +150,8 @@ public class DBBasic
 
     public void InsertDB(int dataType =0)
     {
+        try
+        {
         dbCmd = dbConnection.CreateCommand();
 
         string sqlQuery = GetInsertQuery(dataType);
@@ -159,6 +161,14 @@ public class DBBasic
 
         //닫기
         dbCmd.Dispose();
+
+        }
+        catch(Exception ex)
+        {
+#if UNITY_EDITOR
+            Debug.Log(ex.Message);
+#endif
+        }
 
     }
 

@@ -54,13 +54,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12756}
+      Script: {instanceID: 12758}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13572}
+      Script: {instanceID: 13574}
     - Class: 114
-      Script: {instanceID: 13608}
+      Script: {instanceID: 13610}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -109,9 +109,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12010}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13608}
+      Script: {instanceID: 13610}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -156,15 +156,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12516}
     - Class: 114
-      Script: {instanceID: 12756}
+      Script: {instanceID: 12758}
     - Class: 114
-      Script: {instanceID: 12796}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 13126}
+      Script: {instanceID: 13128}
     - Class: 114
-      Script: {instanceID: 13228}
+      Script: {instanceID: 13230}
     - Class: 114
-      Script: {instanceID: 13608}
+      Script: {instanceID: 13610}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -922,6 +922,12 @@ ScriptsOnlyBuild:
     className: SaveFileText
   - hash:
       serializedVersion: 2
+      Hash: e7da3731bf60f0f6aa76ba24b976361b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GNSSWindow
+  - hash:
+      serializedVersion: 2
       Hash: 077a655851f95717e3c15e754ebc0c57
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1561,4 +1567,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/TcpDemoServerScene.unity
   - Assets/Scenes/UdpDemoServerScene.unity
   - Assets/Scenes/RS232ServerScene.unity
-  playerPath: C:/Users/admin/Desktop/VOS_Project/VOS_1026_DemoServer/Tcp/VOS_Database.exe
+  playerPath: C:/Users/admin/Desktop/VOS_Project/VOS_1028_DemoServer_Ver02/VOS_Database.exe

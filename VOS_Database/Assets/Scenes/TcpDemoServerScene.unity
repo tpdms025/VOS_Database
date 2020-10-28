@@ -526,4 +526,4 @@ MonoBehaviour:
   debugText: {fileID: 764480257}
   portName: 
   port: 7003
-  sendIntervalTime: 1
+  sendIntervalTime: 5
