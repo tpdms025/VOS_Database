@@ -99,9 +99,9 @@ public class GNSSWindow : MonoBehaviour
     /// <param name="_pitch"></param>
     public void RotationShip(short _roll, short _pitch)
     {
-        Vector3 dirction = new Vector3(_pitch, 0, _roll);
+        Vector3 direction = new Vector3(_pitch, _roll , 0);
 
-        icon_ship.transform.localEulerAngles = Quaternion.FromToRotation(Vector3.up, dirction).eulerAngles;
+        icon_ship.transform.localEulerAngles = Quaternion.FromToRotation(Vector3.up, direction).eulerAngles;
     }
 
 
