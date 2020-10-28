@@ -822,13 +822,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1024802896}
-  shipTransform: {fileID: 0}
-  shipRotate: {fileID: 0}
+  icon_ship: {fileID: 0}
   texSize: {x: 0, y: 0}
-  texUnit: {x: 0, y: 0}
   texCenter: {x: 0, y: 0}
+  texUnit: {x: 0, y: 0}
+  gnssPoints: []
+  gnssDist: {x: 0, y: 0}
+  gnssCenter: {x: 0, y: 0}
+  pointsCenter: {x: 0, y: 0}
   curTexPos: {x: 0, y: 0}
   curShipPos: {x: 0, y: 0}
+  targetDirection: {x: 0, y: 1}
 --- !u!114 &881605877
 MonoBehaviour:
   m_ObjectHideFlags: 0
