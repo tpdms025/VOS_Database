@@ -374,7 +374,7 @@ public class DBManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        StartCoroutine(Main());
+        //StartCoroutine(Main());
     }
 
 #if UNITY_EDITOR
@@ -391,8 +391,12 @@ public class DBManager : MonoBehaviour
         }
     }
 #endif
+    private IEnumerator MainJson()
+    {
 
-    private IEnumerator Main()
+        yield return null;
+    }
+    private IEnumerator MainCor()
     {
         preDate = System.DateTime.Now.ToString("yyyy-MM-dd");
         string originFileName = "Origin_" + preDate + ".sqlite";
@@ -459,8 +463,8 @@ public class DBManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        originData.DBDisconnect();
-        timestampData.DBDisconnect();
+        //originData.DBDisconnect();
+        //timestampData.DBDisconnect();
     }
 
 }
