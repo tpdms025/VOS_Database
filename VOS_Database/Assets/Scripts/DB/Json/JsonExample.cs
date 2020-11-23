@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,12 +8,15 @@ using UnityEngine;
 
 public class JsonExample : MonoBehaviour
 {
+    readonly public string actualPath = Application.streamingAssetsPath + "/";
+    private List<JTestClass> JsonInfoList = new List<JTestClass>();
+
     void Start()
     {
         JTestClass jtc = new JTestClass(true);
         string jsonData = ObjectToJson(jtc);
 
-        CreateJsonFile(DBManager.Inst.actualPath, "JsonTest1", jsonData);
+        CreateJsonFile(actualPath, "JsonTest1", jsonData);
         Debug.Log(jsonData);
 
         //var jtc2 = JsonToOject<JTestClass>(jsonData);
