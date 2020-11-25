@@ -13,8 +13,24 @@ public class JsonExample : MonoBehaviour
 
     void Start()
     {
-        JTestClass jtc = new JTestClass(true);
-        string jsonData = ObjectToJson(jtc);
+        //JTestClass jtc = new JTestClass(true);
+        JsonInfoList.Add(new JTestClass(true));
+        JsonInfoList.Add(new JTestClass(false));
+        JsonInfoList.Add(new JTestClass(true));
+
+        ////test
+        //JObject jObject = new JObject();
+        //JObject levelObject = new JObject();
+        //levelObject.Add(JsonInfoList);
+        //for (int i = 0; i < JsonInfoList.Count; i++)
+        //{
+        //    jObject.Add(i.ToString(), levelObject);
+        //    Debug.Log(i);
+        //}
+        //string jsonData = ObjectToJson(jObject);
+
+
+        string jsonData = ObjectToJson(JsonInfoList);
 
         CreateJsonFile(actualPath, "JsonTest1", jsonData);
         Debug.Log(jsonData);
@@ -25,7 +41,7 @@ public class JsonExample : MonoBehaviour
 
     string ObjectToJson(object obj)
     {
-        return JsonConvert.SerializeObject(obj);
+        return JsonConvert.SerializeObject(obj,Formatting.Indented);
     }
 
     T JsonToOject<T>(string jsonData)

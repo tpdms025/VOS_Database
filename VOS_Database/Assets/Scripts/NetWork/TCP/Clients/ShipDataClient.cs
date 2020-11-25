@@ -23,8 +23,6 @@ public class ShipDataClient : TCP_LocalClient
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
-        DBManager.Inst.DataEnqueue(new Database.ShipData(datas));
-
-       
+        DBManager_vr1.Inst.DataEnqueue(new Database.ShipData(datas));
     }
 }

@@ -13,7 +13,7 @@ public class WaveDataClient : UDP_Client
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
-        DBManager.Inst.DataEnqueue(new Database.WaveData(datas));
+        DBManager_vr1.Inst.DataEnqueue(new Database.WaveData(datas));
 
         
         //string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");

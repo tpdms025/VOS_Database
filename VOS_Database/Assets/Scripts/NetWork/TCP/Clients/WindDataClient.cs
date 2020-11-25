@@ -13,7 +13,7 @@ public class WindDataClient : TCP_LocalClient
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
-        DBManager.Inst.DataEnqueue(new Database.WindData(datas));
+        DBManager_vr1.Inst.DataEnqueue(new Database.WindData(datas));
 
         //string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
         //Vector3 windDirection = StringToVector3(datas[0]);

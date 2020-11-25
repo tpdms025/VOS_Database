@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JTestClass
 {
+    public int index=0;
     public int i;
     public float f;
     public bool b;
