@@ -1,4 +1,14 @@
-﻿using Mono.Data.Sqlite;
+﻿// ==============================================================
+// Database
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-06-09
+// UPDATED: 2020-10-28
+// ==============================================================
+
+
+
+using Mono.Data.Sqlite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +40,8 @@ public class DBBasic
 
     #endregion
 
+
+
     #region DB Create
 
     /// <summary>
@@ -53,8 +65,6 @@ public class DBBasic
         {
             SQLiteConnection.CreateFile(filepath);
         }
-
-        //yield return null;
     }
     #endregion
 
@@ -100,9 +110,11 @@ public class DBBasic
     {
         filepath = DBManager.Inst.actualPath + path;
 
-        ////using을 사용함으로써 비정상적인 예외가 발생할 경우에도 반드시 파일을 닫히도록 할 수 있다.
-        string connectionString = "URI=file:" + filepath;
+        //파일 생성
+        DBCreate(path);
 
+
+        string connectionString = "URI=file:" + filepath;
         if (dbConnection == null)
         {
             dbConnection = new SqliteConnection(connectionString);
@@ -117,6 +129,10 @@ public class DBBasic
             {
                 //열기
                 dbConnection.Open();
+
+                //테이블 생성 (비어있을때만 생성됨)
+                CreateAllTable();
+
 #if UNITY_EDITOR
                 Debug.Log("[" + path + "] db Connect!");
 #endif
@@ -128,8 +144,6 @@ public class DBBasic
             Debug.Log("DBConnect Error : " + e.Message);
 #endif
         }
-
-        //yield return null;
     }
 
     public void DBDisconnect()
@@ -142,7 +156,6 @@ public class DBBasic
             }
             dbConnection = null;
         }
-
     }
     #endregion
 
@@ -150,24 +163,27 @@ public class DBBasic
 
     public void InsertDB(int dataType =0)
     {
-        try
+        if (dbConnection != null && dbConnection.State != ConnectionState.Closed)
         {
-        dbCmd = dbConnection.CreateCommand();
+            try
+            {
+                dbCmd = dbConnection.CreateCommand();
 
-        string sqlQuery = GetInsertQuery(dataType);
+                string sqlQuery = GetInsertQuery(dataType);
 
-        dbCmd.CommandText = sqlQuery;
-        dbCmd.ExecuteReader();                  //명령어를 Connection 통해 보내고 SqlDataReader 바인딩
+                dbCmd.CommandText = sqlQuery;
+                dbCmd.ExecuteReader();                  //명령어를 Connection 통해 보내고 SqlDataReader 바인딩
 
-        //닫기
-        dbCmd.Dispose();
+                //닫기
+                dbCmd.Dispose();
 
-        }
-        catch(Exception ex)
-        {
+            }
+            catch (Exception ex)
+            {
 #if UNITY_EDITOR
-            Debug.Log(ex.Message);
+                Debug.Log(ex.Message);
 #endif
+            }
         }
 
     }
@@ -265,7 +281,6 @@ public class DBBasic
     }
 
     #endregion
-
    
     #region Delete
 

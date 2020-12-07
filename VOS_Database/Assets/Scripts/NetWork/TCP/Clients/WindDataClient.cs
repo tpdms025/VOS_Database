@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ==============================================================
+// 바람정보를 담는 클라이언트
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-04-27
+// UPDATED: 2020-06-19
+// ==============================================================
+
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +23,12 @@ public class WindDataClient : TCP_LocalClient
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
-        DBManager_vr1.Inst.DataEnqueue(new Database.WindData(datas));
 
-        //string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
-        //Vector3 windDirection = StringToVector3(datas[0]);
-        //float windSpeed = Convert.ToSingle(datas[1]);
+        //Josn Version (스크립트 이름 변경 해야함. DBManager_ver1 ->DBManager)
+        //DBManager.Inst.DataEnqueue(new Database.WindData(datas));
+        //DBManager.Inst.SetWindData(new Database.WindData(datas));
 
-        //DBManager.Inst.DataEnqueue(new Database.WindData(time, windDirection, windSpeed));
+        //Sqlite Version
+        DBManager.Inst.DataEnqueue(new Database.WindData(datas));
     }
 }

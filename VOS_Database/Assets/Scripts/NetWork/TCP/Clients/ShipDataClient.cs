@@ -23,6 +23,11 @@ public class ShipDataClient : TCP_LocalClient
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
-        DBManager_vr1.Inst.DataEnqueue(new Database.ShipData(datas));
+        //Josn Version (스크립트 이름 변경 해야함. DBManager_ver1 ->DBManager)
+        //DBManager.Inst.DataEnqueue(new Database.ShipData(datas));
+        //DBManager.Inst.SetWindData(new Database.ShipData(datas));
+
+        //Sqlite Version
+        DBManager.Inst.DataEnqueue(new Database.ShipData(datas));
     }
 }

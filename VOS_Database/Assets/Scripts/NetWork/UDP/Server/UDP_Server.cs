@@ -27,6 +27,10 @@ public class UDP_Server : MonoBehaviour
     {
         debugQueue.Enqueue(_str + "\n");
     }
+    private void LogInit()
+    {
+        debugText.text = string.Empty;
+    }
 
     public InputField hostField = null;
     public InputField portField = null;
@@ -89,10 +93,6 @@ public class UDP_Server : MonoBehaviour
     #endregion
 
 
-    private void Start()
-    {
-        //UdpStart();
-    }
 
     protected virtual void Update()
     {
@@ -137,6 +137,8 @@ public class UDP_Server : MonoBehaviour
             isApplicationQuit = false;
             socketReady = true;
 
+
+            LogInit();
             Log("Server has been started on " + portName + " " + port.ToString());
 
             SendMessages();
@@ -200,18 +202,18 @@ public class UDP_Server : MonoBehaviour
                 byte[] sendBuffer = Encoding.ASCII.GetBytes(msg);
 
                 socket.Send(sendBuffer, sendBuffer.Length);
-                Debug.Log("Send " + remoteEndPoint.Address.ToString() + " to " + msg);
+                Log("Send " + remoteEndPoint.Address.ToString() + " to " + msg);
 
 
                 temp++;
                 Thread.Sleep(100);
             }
-            Debug.Log(isApplicationQuit.ToString());
+            Log(isApplicationQuit.ToString());
 
         }
         catch (Exception e)
         {
-            Debug.Log("sendThrad error : " + e.Message);
+            Log("sendThrad error : " + e.Message);
         }
     }
 

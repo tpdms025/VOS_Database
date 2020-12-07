@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-// Cracked UDP 클라이언트 구조 (수신)
+// UDP 클라이언트 구조 (수신)
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-06-09
@@ -55,20 +55,6 @@ public class UDP_Client : Client
     protected virtual void Parsing(string _str)
     {
     }
-
-    protected Vector3 StringToVector3(string sVector)
-    {
-        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
-        {
-            sVector = sVector.Substring(1, sVector.Length - 2);
-        }
-
-        string[] sArray = sVector.Split(',');
-
-        Vector3 result = new Vector3(float.Parse(sArray[0]), float.Parse(sArray[1]), float.Parse(sArray[2]));
-
-        return result;
-    }
     #endregion
 
     #region UdpClient
@@ -107,7 +93,9 @@ public class UDP_Client : Client
         }
         catch (Exception ex)
         {
+#if UNITY_EDITOR
             Debug.Log(ex.Message);
+#endif
             CloseSocket();
         }
     }
@@ -122,7 +110,9 @@ public class UDP_Client : Client
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() +" ReceiveThrad error : " + e.Message);
+#endif
             CloseSocket();
         }
     }
@@ -142,13 +132,17 @@ public class UDP_Client : Client
             Array.Copy(receiveBuffer, data, receiveBuffer.Length);
 
             ReceiveData = Encoding.ASCII.GetString(data);
-            //Debug.Log(_type.ToString() + " Receive : " + ReceiveData);
+#if UNITY_EDITOR
+            Debug.Log(_type.ToString() + " Receive : " + ReceiveData);
+#endif
 
             socket.BeginReceive(new AsyncCallback(ReceiveCallback), socket);
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " Receive Error" + e.Message);
+#endif
             CloseSocket();
         }
     }
@@ -192,16 +186,20 @@ public class UDP_Client : Client
 
 
                     socket.Send(sendBuffer, sendBuffer.Length);
+#if UNITY_EDITOR
                     Debug.Log(_type.ToString() + " Send " + remoteEndPoint.Address.ToString() + " to " + msg);
+#endif
                 }
-                
+
                 Thread.Sleep(100);
             }
             //Debug.Log(isApplicationQuit.ToString());
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " sendThrad error : " + e.Message);
+#endif
         }
     }
     #endregion

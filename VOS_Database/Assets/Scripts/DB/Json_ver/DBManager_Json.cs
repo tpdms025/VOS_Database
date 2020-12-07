@@ -1,10 +1,9 @@
 ﻿// ==============================================================
-// DB Manager 
-// Add Json version 1
+// DB Manager (Json Version)
 //
 // AUTHOR: Yang SeEun
-// CREATED: 2020-11-25
-// UPDATED: 2020-11-25
+// CREATED: 2020-11-24
+// UPDATED: 2020-11-30
 // ==============================================================
 
 using System.Collections;
@@ -15,11 +14,9 @@ using System.Linq;
 using System.Threading;
 using System.Data;
 
-public class DBManager_vr1 : MonoBehaviour
+public class DBManager_Json : MonoBehaviour
 {
     private DBOrigin_Json originData = new DBOrigin_Json();
-    private DBTimestamp_Json timestampData = new DBTimestamp_Json();
-    private DBTimestamp_Json simulationData = new DBTimestamp_Json();
 
     private Thread dataAppendThread;
     readonly public string actualPath = Application.streamingAssetsPath + "/";
@@ -60,6 +57,7 @@ public class DBManager_vr1 : MonoBehaviour
         return originData.sonarData;
         //return sonarData;
     }
+
     #endregion
 
     #region Database Queue Enqueue Method
@@ -102,13 +100,13 @@ public class DBManager_vr1 : MonoBehaviour
     #endregion
 
 
-    ///// <summary>
-    ///// 현재 타임스탬프 데이터를 DB에 삽입한다.
-    ///// </summary>
-    //public void Set_DBTimestamp()
-    //{
-    //    timestampData.InsertDB();
-    //}
+    /// <summary>
+    /// File에 현재 타임스탬프 데이터를 추가한다.
+    /// </summary>
+    public void Append_DBTimestamp()
+    {
+        //timestampData.AppendData<Database.Simulation>();
+    }
 
     ///// <summary>
     ///// 시뮬레이션 파일의 테이블을 가져온다.
@@ -353,8 +351,8 @@ public class DBManager_vr1 : MonoBehaviour
 
 
 
-    private static DBManager_vr1 instance;
-    public static DBManager_vr1 Inst { get { return instance; } set { instance = value; } }
+    private static DBManager_Json instance;
+    public static DBManager_Json Inst { get { return instance; } set { instance = value; } }
 
 
     private void Awake()
@@ -368,7 +366,10 @@ public class DBManager_vr1 : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        StartCoroutine(MainJson());
+        dataAppendThread = new Thread(originData.DBAppendThread);
+        dataAppendThread.Start();
+
+        //StartCoroutine(MainJson());
         //StartCoroutine(Main());
     }
 
@@ -382,34 +383,41 @@ public class DBManager_vr1 : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Keypad1))
         {
-            Get_FileNameList_Simulation_namesort();
+            var obj = originData.LoadJsonFile<Database.WaveData>(Path.Combine("InternalData", "Origin"), originFileName);
+
+            Debug.Log("obj.nID"+ obj.nID);
+            Debug.Log("obj.time"+obj.time);
+            Debug.Log("obj.waveHeight"+obj.waveHeight);
+            Debug.Log("obj.waveSpeed"+obj.waveSpeed);
         }
     }
 #endif
 
     private string preDate = string.Empty;
     private string curDate = string.Empty;
+    private string originFileName = string.Empty;
 
     private IEnumerator MainJson()
     {
-        dataAppendThread = new Thread(originData.DBInsertThread);
+        dataAppendThread = new Thread(originData.DBAppendThread);
         dataAppendThread.Start();
 
         preDate = System.DateTime.Now.ToString("yyyy-MM-dd");
-        string originFileName = "Origin_" + preDate + ".json";
+        originFileName = string.Format("Origin_{0}_", preDate);
+
+        originData.InitFileInfo(Path.Combine("InternalData", "Origin", preDate),originFileName);
+
         string timestampFileName = preDate + ".json";
-
-        originData.InitFileInfo(Path.Combine("InternalData", "Origin"),originFileName);
-
 
         while (true)
         {
             curDate = System.DateTime.Now.ToString("yyyy-MM-dd");
-            originFileName = "Origin_" + curDate + ".json";
+            //originFileName = "Origin_" + curDate + ".json";
+            originFileName = string.Format("Origin_{0}_", curDate);
 
             if (preDate != curDate)
             {
-                originData.InitFileInfo(Path.Combine("InternalData", "Origin"),originFileName);
+                originData.InitFileInfo(Path.Combine("InternalData", "Origin", preDate),originFileName);
             }
             yield return null;
         }

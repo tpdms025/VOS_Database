@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// ==============================================================
+// Rs232-C 클라이언트 구조 (수신)
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-07-09
+// UPDATED: 2020-08-21
+// ==============================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
@@ -46,20 +54,6 @@ public class SerialCOM : Client
 
     protected virtual void Parsing(string _str)
     {
-    }
-
-    protected Vector3 StringToVector3(string sVector)
-    {
-        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
-        {
-            sVector = sVector.Substring(1, sVector.Length - 2);
-        }
-
-        string[] sArray = sVector.Split(',');
-
-        Vector3 result = new Vector3(float.Parse(sArray[0]), float.Parse(sArray[1]), float.Parse(sArray[2]));
-
-        return result;
     }
     #endregion
 

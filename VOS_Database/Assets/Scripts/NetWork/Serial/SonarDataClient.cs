@@ -1,4 +1,13 @@
-﻿using System;
+﻿// ==============================================================
+// 소리정보를 담는 클라이언트
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-07-09
+// UPDATED: 2020-08-21
+// ==============================================================
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,14 +22,12 @@ public class SonarDataClient : SerialCOM
         string[] _datas = _str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
         string[] datas = _datas[0].Split('^');
 
+        //Josn Version (스크립트 이름 변경 해야함. DBManager_ver1 ->DBManager)
+        //DBManager.Inst.DataEnqueue(new Database.SonarData(datas));
+        //DBManager.Inst.SetWindData(new Database.SonarData(datas));
+
+        //Sqlite Version
         DBManager.Inst.DataEnqueue(new Database.SonarData(datas));
-
-        //string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt");
-        //float distance = Convert.ToSingle(datas[0]);
-        //float depth = Convert.ToSingle(datas[1]);
-        //Vector3 direction = StringToVector3(datas[2]);
-
-        //DBManager.Inst.DataEnqueue(new Database.SonarData(time, distance, depth, direction));
 
     }
 }

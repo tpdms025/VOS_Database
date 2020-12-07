@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// ==============================================================
+// (서버에서 수신한) 원본 데이터 관리
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-11-24
+// UPDATED: 2020-11-30
+// ==============================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -22,50 +30,49 @@ public class DBOrigin_Json : DBBasic_Json
     public Queue<Database.SonarData> sonarDataQueue = new Queue<Database.SonarData>();
 
     /// <summary>
-    /// 데이터 삽입을 관리하는 메소드
+    /// 데이터 추가를 관리하는 메소드
     /// </summary>
-    public void DBInsertThread()
+    public void DBAppendThread()
     {
-        while (DBManager_vr1.Inst.applicationQuit.Equals(false))
+        while (DBManager_Json.Inst.applicationQuit.Equals(false))
         {
-
             if (!saving)
             {
                 isInsertEnd = true;
 
                 if (weatherDataQueue.Count > 0)
                 {
-                    InsertDB(weatherDataQueue);
+                    AppendData(weatherDataQueue,DataType.WeatherData);
                     weatherDataQueue.Clear();
                 }
                 if (windDataQueue.Count > 0)
                 {
-                    InsertDB(windDataQueue);
+                    AppendData(windDataQueue, DataType.WindData);
                     windDataQueue.Clear();
                 }
                 if (shipDataQueue.Count > 0)
                 {
-                    InsertDB(shipDataQueue);
+                    AppendData(shipDataQueue, DataType.ShipData);
                     shipDataQueue.Clear();
                 }
                 if (waveDataQueue.Count > 0)
                 {
-                    InsertDB(waveDataQueue);
+                    AppendData(waveDataQueue, DataType.WaveData);
                     waveDataQueue.Clear();
                 }
                 if (pipeSensorDataQueue.Count > 0)
                 {
-                    InsertDB(pipeSensorDataQueue);
+                    AppendData(pipeSensorDataQueue, DataType.PipeSensorData);
                     pipeSensorDataQueue.Clear();
                 }
                 if (robotDataQueue.Count > 0)
                 {
-                    InsertDB(robotDataQueue);
+                    AppendData(robotDataQueue, DataType.RobotData);
                     robotDataQueue.Clear();
                 }
                 if (sonarDataQueue.Count > 0)
                 {
-                    InsertDB(sonarDataQueue);
+                    AppendData(sonarDataQueue, DataType.SonarData);
                     sonarDataQueue.Clear();
                 }
                 isInsertEnd = false;

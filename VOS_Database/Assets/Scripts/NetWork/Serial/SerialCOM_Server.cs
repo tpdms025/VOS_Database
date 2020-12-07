@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿// ==============================================================
+// Rs232-C 서버 구조 (송신)
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-07-09
+// UPDATED: 2020-08-21
+// ==============================================================
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;

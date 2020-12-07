@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-// Cracked 네트워크 클라이언트
+// 네트워크 클라이언트
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-04-27
@@ -87,7 +87,9 @@ public class TCP_NetClient
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log("Write error : " + e.Message + " to client " + clientName);
+#endif
         }
 
     }
@@ -111,12 +113,16 @@ public class TCP_NetClient
             }
 
             //close
+#if UNITY_EDITOR
             Debug.Log("connect End");
-            
+#endif
+
         }
         catch (SocketException e)
         {
+#if UNITY_EDITOR
             Debug.Log("Write error : " + e.Message + " to client " + client.clientName);
+#endif
         }
     }
 

@@ -47,20 +47,6 @@ public class TCP_LocalClient : Client
     protected virtual void Parsing(string _str)
     {
     }
-
-    protected Vector3 StringToVector3(string sVector)
-    {
-        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
-        {
-            sVector = sVector.Substring(1, sVector.Length - 2);
-        }
-
-        string[] sArray = sVector.Split(',');
-
-        Vector3 result = new Vector3(float.Parse(sArray[0]), float.Parse(sArray[1]), float.Parse(sArray[2]));
-
-        return result;
-    }
     #endregion
 
     #region TcpClient
@@ -89,7 +75,9 @@ public class TCP_LocalClient : Client
         }
         catch (Exception ex)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " Connect error : " + ex.Message);
+#endif
             state = NetworkConnection.Fail;
         }
     }
@@ -130,7 +118,9 @@ public class TCP_LocalClient : Client
         }
         catch (SocketException ex)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " Connect error : " + ex.Message);
+#endif
             CloseSocket();
         }
     }
@@ -153,14 +143,17 @@ public class TCP_LocalClient : Client
 
             StringData = Encoding.ASCII.GetString(data);
 
-
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " Receive : " + StringData);
+#endif
 
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log(_type.ToString() + " Receive Error" + e.Message);
+#endif
             CloseSocket();
         }
     }
@@ -180,13 +173,19 @@ public class TCP_LocalClient : Client
                 var incommingData = new byte[bytelength];
                 Array.Copy(receiveBuffer, 0, incommingData, 0, bytelength);
                 string data3 = Encoding.ASCII.GetString(incommingData);
+#if UNITY_EDITOR
                 Debug.Log("receive: " + data3);
+#endif
             }
+#if UNITY_EDITOR
             Debug.Log("Client read End");
+#endif
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.Log("Receive Error" + e.Message);
+#endif
         }
     }
 

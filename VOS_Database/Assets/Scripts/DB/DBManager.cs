@@ -1,5 +1,5 @@
 ﻿// ==============================================================
-// DB Manager
+// DB Manager (Sqlite Version)
 //
 // AUTHOR: Yang SeEun
 // CREATED: 2020-06-18
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading;
 using System.Data;
 
-public enum DataType { WeatherData, WindData, ShipData , WaveData , PipeSensorData, RobotData , SonarData, All =30 };
+public enum DataType { Timestamp = -1, WeatherData, WindData, ShipData , WaveData , PipeSensorData, RobotData , SonarData};
 
 public class DBManager : MonoBehaviour
 {
@@ -374,47 +374,18 @@ public class DBManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        //StartCoroutine(Main());
+        StartCoroutine(MainCor());
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            Set_DBTimestamp();
-            Debug.Log("Timestamp Insert!");
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            Get_FileNameList_Simulation_namesort();
-        }
-    }
-#endif
-    private IEnumerator MainJson()
-    {
-
-        yield return null;
-    }
     private IEnumerator MainCor()
     {
         preDate = System.DateTime.Now.ToString("yyyy-MM-dd");
         string originFileName = "Origin_" + preDate + ".sqlite";
         string timestampFileName = preDate + ".sqlite";
 
-        //CreateFile
-        originData.DBCreate(Path.Combine("InternalData", "Origin", originFileName));
-        timestampData.DBCreate(Path.Combine("InternalData", "Timestamp", timestampFileName));
-
-
         //Connect
         originData.DBConnect(Path.Combine("InternalData", "Origin", originFileName));
         timestampData.DBConnect(Path.Combine("InternalData", "Timestamp", timestampFileName));
-
-
-        //CreateTable
-        originData.CreateAllTable();
-        timestampData.CreateAllTable();
 
 
         StartCoroutine(DateCheck());
@@ -434,6 +405,7 @@ public class DBManager : MonoBehaviour
     /// </summary>
     private IEnumerator DateCheck()
     {
+        //다음날이 되었는지 매프레임마다 체크
         while (true)
         {
             curDate = System.DateTime.Now.ToString("yyyy-MM-dd");
@@ -442,20 +414,21 @@ public class DBManager : MonoBehaviour
                 string originFileName = "Origin_" + curDate + ".sqlite";
                 string timestampFileName = curDate + ".sqlite";
 
-                //CreateFile
-                originData.DBCreate(Path.Combine("InternalData", "Origin", originFileName));
-                timestampData.DBCreate(Path.Combine("InternalData", "Timestamp", timestampFileName));
+
+                ////CreateFile
+                //originData.DBCreate(Path.Combine("InternalData", "Origin", originFileName));
+                //timestampData.DBCreate(Path.Combine("InternalData", "Timestamp", timestampFileName));
 
 
                 //Connect
                 originData.DBConnect(Path.Combine("InternalData", "Origin", originFileName));
                 timestampData.DBConnect(Path.Combine("InternalData", "Timestamp", timestampFileName));
 
+                ////CreateTable
+                //originData.CreateAllTable();
+                //timestampData.CreateAllTable();
 
-                //CreateTable
-                originData.CreateAllTable();
-                timestampData.CreateAllTable();
-
+                preDate = curDate;
             }
             yield return null;
         }
@@ -463,8 +436,8 @@ public class DBManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //originData.DBDisconnect();
-        //timestampData.DBDisconnect();
+        originData.DBDisconnect();
+        timestampData.DBDisconnect();
     }
 
 }

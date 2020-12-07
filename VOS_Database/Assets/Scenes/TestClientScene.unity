@@ -291,6 +291,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 493301185}
+        m_MethodName: ConnectedToServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &65436265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493301184}
   - component: {fileID: 493301183}
+  - component: {fileID: 493301185}
   m_Layer: 0
   m_Name: Clients (1)
   m_TagString: Untagged
@@ -559,6 +571,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493301185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493301182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955e178d2e3232a4796576d89bbbc7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 5
+  state: 0
+  ip: 172.31.7.119
+  port: 8002
+  socketReady: 0
 --- !u!1 &524746316
 GameObject:
   m_ObjectHideFlags: 0

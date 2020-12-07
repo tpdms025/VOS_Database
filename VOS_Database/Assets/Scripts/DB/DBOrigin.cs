@@ -147,7 +147,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < weatherDataQueue.Count; i++)
                     {
                         weatherData = weatherDataQueue.Dequeue();
-                        InsertDB(DataType.WeatherData.GetHashCode());
+                        //InsertDB(DataType.WeatherData.GetHashCode());
                     }
                 }
                 if (windDataQueue.Count > 0)
@@ -155,7 +155,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < windDataQueue.Count; i++)
                     {
                         windData = windDataQueue.Dequeue();
-                        InsertDB(DataType.WindData.GetHashCode());
+                        //InsertDB(DataType.WindData.GetHashCode());
                     }
                 }
                 if (shipDataQueue.Count > 0)
@@ -163,7 +163,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < shipDataQueue.Count; i++)
                     {
                         shipData = shipDataQueue.Dequeue();
-                        InsertDB(DataType.ShipData.GetHashCode());
+                        //InsertDB(DataType.ShipData.GetHashCode());
                     }
                 }
                 if (waveDataQueue.Count > 0)
@@ -171,7 +171,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < waveDataQueue.Count; i++)
                     {
                         waveData = waveDataQueue.Dequeue();
-                        InsertDB(DataType.WaveData.GetHashCode());
+                        //InsertDB(DataType.WaveData.GetHashCode());
                     }
                 }
                 if (pipeSensorDataQueue.Count > 0)
@@ -179,7 +179,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < pipeSensorDataQueue.Count; i++)
                     {
                         pipeSensorData = pipeSensorDataQueue.Dequeue();
-                        InsertDB(DataType.PipeSensorData.GetHashCode());
+                        //InsertDB(DataType.PipeSensorData.GetHashCode());
                     }
                 }
                 if (robotDataQueue.Count > 0)
@@ -187,7 +187,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < robotDataQueue.Count; i++)
                     {
                         robotData = robotDataQueue.Dequeue();
-                        InsertDB(DataType.RobotData.GetHashCode());
+                        //InsertDB(DataType.RobotData.GetHashCode());
                     }
                 }
                 if (sonarDataQueue.Count > 0)
@@ -195,7 +195,7 @@ public class DBOrigin : DBBasic
                     for (int i = 0; i < sonarDataQueue.Count; i++)
                     {
                         sonarData = sonarDataQueue.Dequeue();
-                        InsertDB(DataType.SonarData.GetHashCode());
+                        //InsertDB(DataType.SonarData.GetHashCode());
                     }
                 }
                 isInsertEnd = false;

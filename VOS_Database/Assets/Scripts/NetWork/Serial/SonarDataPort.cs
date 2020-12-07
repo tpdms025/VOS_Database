@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿// ==============================================================
+// 소리 정보를 관리하는 포트
+//
+// AUTHOR: Yang SeEun
+// CREATED: 2020-07-09
+// UPDATED: 2020-08-21
+// ==============================================================
+
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
